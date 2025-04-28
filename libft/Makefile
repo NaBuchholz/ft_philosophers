@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:23:03 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/03/17 16:03:51 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/04/28 13:47:13 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,35 +64,26 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 OBJ = ${SRC:.c=.o}
 RM = rm -f
 
-all: init-modules ${PRINTF} ${NAME}
+all: ${PRINTF} ${NAME}
 
 ${NAME}: ${OBJ} ${PRINTF}
-	ar rcs ${NAME} ${OBJ} ${PRINTF}
+	@ar rcs ${NAME} ${OBJ} ${PRINTF}
+	
 
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
-${PRINTF}: init-modules
+${PRINTF}: 
 	@make -C ${PRINTF_DIR}
 
-init-modules:
-	@if [ ! -d "printf" ] || [ ! -f "printf/.git" ]; then \
-		echo "Initializing printf submodule..."; \
-		git submodule update --init --recursive ${PRINTF_DIR}; \
-	else \
-		echo "Updating printf submodule..."; \
-		BRANCH=$$(git config -f .gitmodules --get submodule.${PRINTF_DIR}.branch || echo "main"); \
-		(cd ${PRINTF_DIR} && git checkout $$BRANCH && git pull origin $$BRANCH); \
-	fi
-
 clean:
-	${RM} ${OBJ}
+	@${RM} ${OBJ}
 	@make -C ${PRINTF_DIR} clean
 
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
 	@make -C ${PRINTF_DIR} fclean
 
 re: fclean all
 
-.PHONY = all clean fclean re init-modules
+.PHONY = all clean fclean re
