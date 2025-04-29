@@ -6,7 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:22:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/04/28 13:22:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:57:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHILO_H
+	#define PHILO_H
+# include <unistd.h>
+# include <stdio.h>
+#endif

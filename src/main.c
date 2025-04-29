@@ -6,11 +6,9 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/04/28 14:10:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:56:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	main(void)
 {

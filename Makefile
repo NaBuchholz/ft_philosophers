@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/04/28 13:50:12 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/04/29 12:59:06 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,35 +29,26 @@ SRC = main.c
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 HEADER = $(INCDIR)/$(NAME).h
-LIBFTDIR = libft
-LIBFT = $(LIBFTDIR)/libft.a
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFTDIR) -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo -e "$(GREEN)Executable $(NAME) successfully created!$(RESET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADER) | $(OBJDIR)
-	@$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFTDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCDIR)  -c $< -o $@
 	@echo -e "$(BLUE)Compiling $<...$(RESET)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(LIBFT):
-	@echo -e "$(PURPLE)Compiling libft...$(RESET)"
-	@make -C $(LIBFTDIR)
-	@echo -e "$(PURPLE)Libft successfully compiled!$(RESET)"
-
 clean:
 	@rm -rf $(OBJDIR)
-	@make -C $(LIBFTDIR) clean
 	@echo -e "$(RED)Object files removed.$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@make -C $(LIBFTDIR) fclean
 	@echo -e "$(RED)Executable $(NAME) removed.$(RESET)"
 
 re: fclean all
