@@ -56,3 +56,6 @@ dkms.conf
 
 #vscode setthings
 .vscode/
+
+#philo executable
+philo
