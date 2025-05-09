@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/08 21:08:07 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:22:02 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 {
 	t_philo	philo;
 
-	if (ac < 4 || ac > 5)
+	if (ac < 5 || ac > 6)
 		exit(2);
 	parse_args(++av, ac, &philo);
 	printf("Hello Philo!\n");
