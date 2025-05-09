@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/08 21:16:23 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/09 09:37:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,35 @@ int	ft_atoi(const char *str)
 	return (result *= sign_aux);
 }
 
-void	parse_args(char **av, int ac, t_philo *philo)
+static int	is_valid_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= 48 && str[i] <= 57))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	parse_args(char **av, int ac, t_data *data)
 {
 	int		i;
 	int		num;
 
-	philo->args = malloc((ac - 1) * sizeof (int));
-	if (philo->args == NULL)
-		exit(1);
 	i = 0;
-	while (av[i])
+	if (!is_valid_number(av[0]) || !is_valid_number(av[1])
+		|| !is_valid_number(av[2]) || !is_valid_number(av[3]))
 	{
-		num = 0;
-		num = ft_atoi(av[i]);
-		if (!num || num <= 0)
-			exit(2);
-		philo->args[i] = num;
-		i++;
+		printf("Error: no valid input\n");
+		return (0);
 	}
+	data->philo_count = ft_atoi(av[0]);
+	data->time_to_die = ft(av[1]);
+	data->time_to_eat = ft(av[2]);
+	data->time_to_sleep = ft(av[3]);
+
 }
