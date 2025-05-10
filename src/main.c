@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/09 09:35:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 12:49:17 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	init_data(&data);
-	if(!parse_args(++av, ac, &data))
-		return(1);
+	if (!parse_args(++av, &data))
+		return (1);
 	printf("Hello Philo!\n");
 	return (0);
-	//number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
-	//          1                 2            3            4                   5*
 }

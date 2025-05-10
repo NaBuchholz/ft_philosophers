@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/09 09:29:51 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:56:53 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,10 @@ int	init_data(t_data *data)
 	data->time_to_sleep = 0;
 	data->must_eat_count = 0;
 	data->start_time = get_time();
+	if (!data->start_time)
+	{
+		printf("Error: Unable to get start time\n");
+		return (0);
+	}
+	return (1);
 }

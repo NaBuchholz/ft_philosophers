@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/09 09:37:06 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 12:52:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_isdigit(int c)
 	return (result);
 }
 
-int	ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	size_t	count;
 	int		sign_aux;
@@ -70,10 +70,9 @@ static int	is_valid_number(char *str)
 	return (1);
 }
 
-int	parse_args(char **av, int ac, t_data *data)
+int	parse_args(char **av, t_data *data)
 {
 	int		i;
-	int		num;
 
 	i = 0;
 	if (!is_valid_number(av[0]) || !is_valid_number(av[1])
@@ -82,9 +81,16 @@ int	parse_args(char **av, int ac, t_data *data)
 		printf("Error: no valid input\n");
 		return (0);
 	}
+	if (ft_atoi(av[0]) > 200)
+	{
+		printf("Error: max of 200 philosophers!\n");
+		return (0);
+	}
 	data->philo_count = ft_atoi(av[0]);
-	data->time_to_die = ft(av[1]);
-	data->time_to_eat = ft(av[2]);
-	data->time_to_sleep = ft(av[3]);
-
+	data->time_to_die = ft_atoi(av[1]);
+	data->time_to_eat = ft_atoi(av[2]);
+	data->time_to_sleep = ft_atoi(av[3]);
+	if (av[4])
+		data->must_eat_count = ft_atoi(av[4]);
+	return (1);
 }
