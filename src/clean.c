@@ -6,6 +6,62 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:32 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/04/28 14:10:34 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:03:52 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/philo.h"
+
+static int	clean_mutex(pthread_mutex_t *mutex)
+{
+	if (mutex == NULL)
+		return (0);
+	if (!pthread_mutex_destroy(mutex))
+		return (1);
+	return (0);
+}
+
+static int	join_philosopher_threads(t_philo *philos, size_t count)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (philos[i].thread)
+			pthread_join(philos[i].thread, NULL);
+		i++;
+	}
+	return (1);
+}
+
+static int	clean_philos(t_philo *philos)
+{
+	if (philos)
+		free(philos);
+	return (1);
+}
+
+int	clean_all(t_data *data)
+{
+	int	i;
+
+	if (!data)
+		return (0);
+	if (data->philos)
+		join_philosopher_threads(data->philos, data->philo_count);
+	if (data->forks)
+	{
+		i = 0;
+		while (i < data->philo_count)
+			clean_mutex(&data->forks[i++]);
+		free(data->forks);
+	}
+	if (&data->dead_mutex)
+		clean_mutex(&data->dead_mutex);
+	if (&data->print_mutex)
+		clean_mutex(&data->dead_mutex);
+	if (data->philos)
+		clean_philos(data->philos);
+	return (1);
+}
