@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 17:27:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:30:01 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_status(t_philo *philo, char *message)
 
 void	take_forks(t_philo *philo)
 {
-	if (philo->l_fork < philo->r_fork)
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->l_fork);
 		print_status(philo, "has taken a fork");
