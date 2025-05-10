@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 12:52:18 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:44:34 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static int	is_valid_number(char *str)
 	while (str[i])
 	{
 		if (!(str[i] >= 48 && str[i] <= 57))
-			return (0);
+			return (EXIT_FAILURE);
 		i++;
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int	parse_args(char **av, t_data *data)
@@ -75,16 +75,18 @@ int	parse_args(char **av, t_data *data)
 	int		i;
 
 	i = 0;
-	if (!is_valid_number(av[0]) || !is_valid_number(av[1])
-		|| !is_valid_number(av[2]) || !is_valid_number(av[3]))
+	if (is_valid_number(av[0]) == EXIT_FAILURE
+		|| is_valid_number(av[1]) == EXIT_FAILURE
+		|| is_valid_number(av[2]) == EXIT_FAILURE
+		|| is_valid_number(av[3]) == EXIT_FAILURE)
 	{
 		printf("Error: no valid input\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
 	if (ft_atoi(av[0]) > 200)
 	{
 		printf("Error: max of 200 philosophers!\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
 	data->philo_count = ft_atoi(av[0]);
 	data->time_to_die = ft_atoi(av[1]);
@@ -92,5 +94,5 @@ int	parse_args(char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[3]);
 	if (av[4])
 		data->must_eat_count = ft_atoi(av[4]);
-	return (1);
+	return (EXIT_SUCCESS);
 }

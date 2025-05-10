@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:22:39 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:37:46 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	init_single_mutex(pthread_mutex_t *mutex)
 
 static int	init_mutexes(t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_count);
@@ -56,7 +56,7 @@ static int	init_mutexes(t_data *data)
 
 static int	init_philos(t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	data->philos = malloc(sizeof(t_philo) * data->philo_count);
 	if (!data->philos)
@@ -78,19 +78,19 @@ static int	init_philos(t_data *data)
 
 int	init_program(t_data *data, char **av)
 {
-	if (!init_data(data))
+	if (init_data(data) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (!parse_args(av, data))
+	if (parse_args(av, data) != EXIT_SUCCESS)
 	{
 		clean_all(data);
 		return (EXIT_FAILURE);
 	}
-	if (!init_mutexes(data))
+	if (init_mutexes(data) != EXIT_SUCCESS)
 	{
 		clean_all(data);
 		return (EXIT_FAILURE);
 	}
-	if (!init_philos(data))
+	if (init_philos(data)!= EXIT_SUCCESS)
 	{
 		clean_all(data);
 		return (EXIT_FAILURE);

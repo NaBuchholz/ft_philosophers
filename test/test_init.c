@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:26:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:27:14 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:33:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int ac, char **av)
 	printf("Number of times each philosopher must eat: %zu\n", data.must_eat_count);
 
 	/* Imprimir informações dos filósofos para verificação */
-	int i;
+	size_t i;
 
 	i = 0;
 	while (i < data.philo_count)

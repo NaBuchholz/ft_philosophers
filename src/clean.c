@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:32 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:18:10 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:32:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	clean_philos(t_philo *philos)
 
 int	clean_all(t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	if (!data)
 		return (1);
@@ -57,10 +57,8 @@ int	clean_all(t_data *data)
 			clean_mutex(&data->forks[i++]);
 		free(data->forks);
 	}
-	if (&data->dead_mutex)
-		clean_mutex(&data->dead_mutex);
-	if (&data->print_mutex)
-		clean_mutex(&data->print_mutex);
+	clean_mutex(&data->dead_mutex);
+	clean_mutex(&data->print_mutex);
 	if (data->philos)
 		clean_philos(data->philos);
 	return (EXIT_SUCCESS);
