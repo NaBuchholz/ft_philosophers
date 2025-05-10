@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:22:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:21:51 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:48:48 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				meals_eaten;
 	size_t			last_meal;
-	int				id;
+	size_t			id;
 	int				eating;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
