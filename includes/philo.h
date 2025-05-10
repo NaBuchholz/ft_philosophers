@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:22:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:48:48 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:15:15 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,8 @@ int			parse_args(char **av, t_data *data);
 int			init_program(t_data *data, char **av);
 long long	get_time(void);
 int			clean_all(t_data *data);
+long long	get_time(void);
+long long	time_diff(long long past);
+void		ft_usleep(long long time_in_ms);
+int			is_simulation_over(t_data *data);
 #endif
