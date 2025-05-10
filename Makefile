@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/10 12:54:38 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/10 15:12:49 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,11 @@ BLUE = \033[0;34m
 PURPLE = \033[0;35m
 CYAN = \033[0;36m
 RESET = \033[0m
+
+TEST_DIR = test
+TEST_SRC = test_init.c
+TEST_OBJ = $(addprefix $(OBJDIR)/, $(TEST_SRC:.c=.o))
+TEST_NAME = test_init
 
 SRC = main.c \
 	  parsing.c \
@@ -51,6 +56,18 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADER) | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
+test: $(LIBFT) $(OBJ) $(TEST_OBJ)
+	@$(CC) $(CFLAGS) $(filter-out $(OBJDIR)/main.o, $(OBJ)) $(TEST_OBJ) -o $(TEST_NAME)
+	@echo -e "$(GREEN)Test executable $(TEST_NAME) successfully created!$(RESET)"
+
+$(OBJDIR)/%.o: $(TEST_DIR)/%.c $(HEADER) | $(OBJDIR)
+	@$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+	@echo -e "$(BLUE)Compiling test file $<...$(RESET)"
+
+run_test: test
+	@echo -e "$(YELLOW)Running test with 4 philosophers, 800ms to die, 200ms to eat, 200ms to sleep...$(RESET)"
+	@./$(TEST_NAME) 4 800 200 200
+
 clean:
 	@rm -rf $(OBJDIR)
 	@echo -e "$(RED)Object files removed.$(RESET)"
@@ -62,4 +79,4 @@ fclean: clean
 re: fclean all
 	@echo -e "$(CYAN)Project successfully recompiled!$(RESET)"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test run_test
