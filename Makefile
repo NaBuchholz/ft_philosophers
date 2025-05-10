@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/08 21:15:00 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/10 12:54:38 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,14 @@ CYAN = \033[0;36m
 RESET = \033[0m
 
 SRC = main.c \
-	  parsing.c
+	  parsing.c \
+	  init.c \
+	  actions.c \
+	  clean.c \
+	  monitor.c \
+	  philosophers.c \
+	  time_utils.c \
+	  utils.c
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 HEADER = $(INCDIR)/$(NAME).h
