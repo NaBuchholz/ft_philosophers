@@ -6,13 +6,13 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 14:15:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:22:39 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_data(t_data *data)
+static int	init_data(t_data *data)
 {
 	data->philo_count = 0;
 	data->time_to_die = 0;
@@ -23,9 +23,9 @@ int	init_data(t_data *data)
 	if (!data->start_time)
 	{
 		printf("Error: Unable to get start time\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 static int	init_single_mutex(pthread_mutex_t *mutex)
@@ -33,40 +33,34 @@ static int	init_single_mutex(pthread_mutex_t *mutex)
 	return (pthread_mutex_init(mutex, NULL) == 0);
 }
 
-int	init_mutexes(t_data *data)
+static int	init_mutexes(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_count);
 	if (!data->forks)
-		return (0);//TODOLidar com falha na inicialização
+		return (EXIT_FAILURE);
 	while (i < data->philo_count)
 	{
 		if (!init_single_mutex(&data->forks[i]))
-		{
-			//TODOfuncao de falha
-			return (0);
-		}
+			return (EXIT_FAILURE);
 		i++;
 	}
 	if (!init_single_mutex(&data->print_mutex)
 		|| !init_single_mutex(&data->dead_mutex))
-	{
-		//TODOLidar com falha na inicialização
-		return (0);
-	}
+		return (EXIT_FAILURE);
 	data->is_dead = 0;
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
-int	init_philos(t_data *data)
+static int	init_philos(t_data *data)
 {
 	int	i;
 
 	data->philos = malloc(sizeof(t_philo) * data->philo_count);
 	if (!data->philos)
-		return (0);//TODOLidar com falha na inicialização
+		return (EXIT_FAILURE);
 	i = 0;
 	while (i < data->philo_count)
 	{
@@ -79,5 +73,27 @@ int	init_philos(t_data *data)
 		data->philos[i].data = data;
 		i++;
 	}
-	return (1);
+	return (EXIT_SUCCESS);
+}
+
+int	init_program(t_data *data, char **av)
+{
+	if (!init_data(data))
+		return (EXIT_FAILURE);
+	if (!parse_args(av, data))
+	{
+		clean_all(data);
+		return (EXIT_FAILURE);
+	}
+	if (!init_mutexes(data))
+	{
+		clean_all(data);
+		return (EXIT_FAILURE);
+	}
+	if (!init_philos(data))
+	{
+		clean_all(data);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

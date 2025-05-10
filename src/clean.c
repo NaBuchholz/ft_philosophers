@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:32 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:08:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:18:10 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static int	clean_mutex(pthread_mutex_t *mutex)
 {
 	if (mutex == NULL)
-		return (1);
+		return (EXIT_FAILURE);
 	if (pthread_mutex_destroy(mutex) != 0)
-		return (1);
-	return (0);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	join_philosopher_threads(t_philo *philos, size_t count)
@@ -32,14 +32,14 @@ static int	join_philosopher_threads(t_philo *philos, size_t count)
 			pthread_join(philos[i].thread, NULL);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static int	clean_philos(t_philo *philos)
 {
 	if (philos)
 		free(philos);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	clean_all(t_data *data)
@@ -60,8 +60,8 @@ int	clean_all(t_data *data)
 	if (&data->dead_mutex)
 		clean_mutex(&data->dead_mutex);
 	if (&data->print_mutex)
-		clean_mutex(&data->dead_mutex);
+		clean_mutex(&data->print_mutex);
 	if (data->philos)
 		clean_philos(data->philos);
-	return (0);
+	return (EXIT_SUCCESS);
 }
