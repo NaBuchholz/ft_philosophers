@@ -59,3 +59,4 @@ dkms.conf
 
 #philo executable
 philo
+test_init
