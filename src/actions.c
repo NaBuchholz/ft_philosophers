@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 17:30:01 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:32:35 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,18 @@ void	take_forks(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-
+	pthread_mutex_lock(&philo->data->dead_mutex);
+	philo->eating = 1;
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->data->dead_mutex);
+	print_status(philo, "is eating");
+	ft_usleep(philo->data->time_to_eat);
+	pthread_mutex_lock(&philo->data->dead_mutex);
+	philo->meals_eaten++;
+	philo->eating = 0;
+	pthread_mutex_unlock(&philo->data->dead_mutex);
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
 }
 
 void	philo_sleep(t_philo *philo)
