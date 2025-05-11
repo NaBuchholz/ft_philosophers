@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/10 16:53:40 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/11 11:07:43 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ CYAN = \033[0;36m
 RESET = \033[0m
 
 TEST_DIR = test
-TEST_SRC = test_init.c
+TEST_SRC = test.c
 TEST_OBJ = $(addprefix $(OBJDIR)/, $(TEST_SRC:.c=.o))
-TEST_NAME = test_init
+TEST_NAME = test
 
 SRC = main.c \
 	  parsing.c \
