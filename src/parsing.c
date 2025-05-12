@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 11:29:08 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:34:16 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	check_valid_number(char *str)
 	return (1);
 }
 
-static int	check_valid_args(char **av, t_data *data)
+static int	check_valid_args(char **av)
 {
 	if (!check_valid_number(av[0]) || !check_valid_number(av[1])
 		|| !check_valid_number(av[2]) || !check_valid_number(av[3]))
@@ -73,7 +73,7 @@ static int	check_valid_args(char **av, t_data *data)
 
 int	parse_args(char **av, t_data *data)
 {
-	if (check_valid_args(av, data) == EXIT_FAILURE)
+	if (check_valid_args(av) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (ft_atosize_t(av[0]) == 0 || ft_atosize_t(av[1]) == 0
 		|| ft_atosize_t(av[2]) == 0 || ft_atosize_t(av[3]) == 0)

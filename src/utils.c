@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:11:09 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 11:29:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:38:58 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ int	is_all_numeric(char *str)
 		i++;
 	}
 	return (1);
+}
+void	*ft_memset(void *s, int c, size_t len)
+{
+	unsigned char	*temp_pt;
+
+	temp_pt = (unsigned char *)s;
+	while (len > 0)
+	{
+		*temp_pt = (unsigned char) c;
+		temp_pt++;
+		len--;
+	}
+	return (s);
 }
