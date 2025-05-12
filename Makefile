@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/11 11:07:43 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/12 10:46:11 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ RESET = \033[0m
 TEST_DIR = test
 TEST_SRC = test.c
 TEST_OBJ = $(addprefix $(OBJDIR)/, $(TEST_SRC:.c=.o))
-TEST_NAME = test
+TEST_NAME = test_philo
 
 SRC = main.c \
 	  parsing.c \

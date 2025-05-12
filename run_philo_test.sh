@@ -70,9 +70,9 @@ run_tests() {
     # Executa o teste completo
     echo -e "\n${YELLOW}--- Executando teste de filósofos ---${RESET}"
     if [ -n "$TIMES_TO_EAT" ]; then
-        ./test $PHILO_COUNT $TIME_TO_DIE $TIME_TO_EAT $TIME_TO_SLEEP $TIMES_TO_EAT
+        ./test_philo $PHILO_COUNT $TIME_TO_DIE $TIME_TO_EAT $TIME_TO_SLEEP $TIMES_TO_EAT
     else
-        ./test $PHILO_COUNT $TIME_TO_DIE $TIME_TO_EAT $TIME_TO_SLEEP
+        ./test_philo $PHILO_COUNT $TIME_TO_DIE $TIME_TO_EAT $TIME_TO_SLEEP
     fi
 }
 
