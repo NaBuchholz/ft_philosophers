@@ -31,9 +31,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar norminette
-RUN pip3 install norminette==3.3.51
+RUN pip3 install norminette==3.3.51 c_formatter_42
 
-# Instalar ZSH 
+# Instalar ZSH
 RUN apt-get update && apt-get install -y zsh && \
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
