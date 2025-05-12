@@ -6,13 +6,13 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/12 10:46:11 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/12 14:43:09 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=philo
 CC=cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -pthread
 SRCDIR = src
 OBJDIR = obj
 INCDIR = includes
