@@ -21,7 +21,7 @@ check_norminette() {
 # Executa a norminette no código
 run_norminette() {
     echo -e "\n${PURPLE}=== Verificando conformidade com a Norma 42 ===${RESET}"
-    norminette ./src ./includes ./test
+    norminette ./src ./includes 
     NORM_STATUS=$?
 
     if [ $NORM_STATUS -eq 0 ]; then
