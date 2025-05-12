@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:24:54 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:19:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ int	main(int ac, char **av)
 	}
 	if (!init_program(&data, ++av))
 		return (EXIT_FAILURE);
-	printf("Hello Philo!\n");
+	if (create_philosophers(&data) != EXIT_SUCCESS)
+	{
+		printf("Error: failed to create philosophers\n");
+		clean_all(&data);
+		return (EXIT_FAILURE);
+	}
 	clean_all(&data);
 	return (EXIT_SUCCESS);
 }
