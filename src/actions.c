@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:36:28 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:39:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_status(t_philo *philo, char *message)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (!is_simulation_over(philo->data))
-		printf("%lld %ld %s\n", time_diff(philo->data->start_time), philo->id,
+		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
 			message);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
