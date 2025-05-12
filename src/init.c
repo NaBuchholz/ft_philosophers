@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:31:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:20:33 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	init_data(t_data *data)
 	data->time_to_eat = 0;
 	data->time_to_sleep = 0;
 	data->must_eat_count = 0;
+	data->forks = NULL;
+	data->philos = NULL;
 	data->start_time = get_time();
 	if (!data->start_time)
 	{
