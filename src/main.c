@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:19:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:27:48 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 		clean_all(&data);
 		return (EXIT_FAILURE);
 	}
+	monitor_philosophers(&data);
 	clean_all(&data);
 	return (EXIT_SUCCESS);
 }
