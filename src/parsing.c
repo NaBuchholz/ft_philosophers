@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:36:00 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:03:57 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,21 @@ static int	ft_isdigit(int c)
 static int	ft_atoi(const char *str)
 {
 	size_t	count;
-	int		sign_aux;
 	int		result;
 
-	sign_aux = 1;
 	count = 0;
 	result = 0;
 	while (ft_isspace(str[count]))
 		count++;
-	if (str[count] == 43 && str[count + 1] != 45)
+	if (str[count] == 43)
 		count++;
-	if (str[count] == 45)
-	{
-		sign_aux *= -1;
-		count++;
-	}
 	while (ft_isdigit(str[count]))
 	{
 		result *= 10;
 		result += str[count] - 48;
 		count++;
 	}
-	return (result *= sign_aux);
+	return (result);
 }
 
 static int	is_valid_number(char *str)
@@ -61,12 +54,16 @@ static int	is_valid_number(char *str)
 	int	i;
 
 	i = 0;
+	if (!str[0])
+		return (EXIT_FAILURE);
 	while (str[i])
 	{
 		if (!(str[i] >= 48 && str[i] <= 57))
 			return (EXIT_FAILURE);
 		i++;
 	}
+	if (ft_atoi(str) <= 0)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,7 +74,7 @@ int	parse_args(char **av, t_data *data)
 		|| is_valid_number(av[2]) == EXIT_FAILURE
 		|| is_valid_number(av[3]) == EXIT_FAILURE)
 	{
-		printf("Error: no valid input\n");
+		printf("Error: values must be positive integers\n");
 		return (EXIT_FAILURE);
 	}
 	if (ft_atoi(av[0]) > 200)
