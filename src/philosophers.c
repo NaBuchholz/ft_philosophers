@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:58 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:18:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:34:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	*philo_routine(void *philosopher)
 	return (NULL);
 }
 
-int	create_philo(t_data *data)
+int	create_philosophers(t_data *data)
 {
 	size_t	i;
 

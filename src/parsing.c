@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:44:34 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:36:00 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ static int	is_valid_number(char *str)
 
 int	parse_args(char **av, t_data *data)
 {
-	int		i;
-
-	i = 0;
 	if (is_valid_number(av[0]) == EXIT_FAILURE
 		|| is_valid_number(av[1]) == EXIT_FAILURE
 		|| is_valid_number(av[2]) == EXIT_FAILURE

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:37:46 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:31:21 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	init_program(t_data *data, char **av)
 		clean_all(data);
 		return (EXIT_FAILURE);
 	}
-	if (init_philos(data)!= EXIT_SUCCESS)
+	if (init_philos(data) != EXIT_SUCCESS)
 	{
 		clean_all(data);
 		return (EXIT_FAILURE);

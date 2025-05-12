@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:11:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:59:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:38:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_usleep(long long time_in_ms)
 		usleep(500);
 }
 
-long long	time_diff(long long past)
+size_t	time_diff(long long past)
 {
 	return (get_time() - past);
 }
