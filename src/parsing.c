@@ -6,87 +6,91 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 11:03:57 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:29:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	ft_isspace(int c)
+static int	ft_isdigit(int c)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-static int	ft_isdigit(int c)
-{
-	int	result;
-
-	result = 0;
-	if (c >= 48 && c <= 57)
-		result = 2048;
-	return (result);
-}
-
-static int	ft_atoi(const char *str)
-{
-	size_t	count;
-	int		result;
-
-	count = 0;
-	result = 0;
-	while (ft_isspace(str[count]))
-		count++;
-	if (str[count] == 43)
-		count++;
-	while (ft_isdigit(str[count]))
-	{
-		result *= 10;
-		result += str[count] - 48;
-		count++;
-	}
-	return (result);
-}
-
-static int	is_valid_number(char *str)
+static int	check_all_digits(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str[0])
-		return (EXIT_FAILURE);
+	if (!str || !str[0])
+		return (0);
 	while (str[i])
 	{
-		if (!(str[i] >= 48 && str[i] <= 57))
-			return (EXIT_FAILURE);
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	if (ft_atoi(str) <= 0)
+	return (1);
+}
+
+static int	check_valid_number(char *str)
+{
+	if (!str || !str[0])
+		return (0);
+	if (str[0] == '-')
+		return (0);
+	if (str[0] == '+' && !str[1])
+		return (0);
+	if (str[0] == '+')
+		str++;
+	if (!check_all_digits(str))
+		return (0);
+	return (1);
+}
+
+static int	check_valid_args(char **av, t_data *data)
+{
+	if (!check_valid_number(av[0]) || !check_valid_number(av[1])
+		|| !check_valid_number(av[2]) || !check_valid_number(av[3]))
+	{
+		printf("Error: values must be positive integers\n");
 		return (EXIT_FAILURE);
+	}
+	if (ft_atosize_t(av[0]) > 200)
+	{
+		printf("Error: max of 200 philosophers!\n");
+		return (EXIT_FAILURE);
+	}
+	if (av[4] && !check_valid_number(av[4]))
+	{
+		printf("Error: values must be positive integers\n");
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
 int	parse_args(char **av, t_data *data)
 {
-	if (is_valid_number(av[0]) == EXIT_FAILURE
-		|| is_valid_number(av[1]) == EXIT_FAILURE
-		|| is_valid_number(av[2]) == EXIT_FAILURE
-		|| is_valid_number(av[3]) == EXIT_FAILURE)
+	if (check_valid_args(av, data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (ft_atosize_t(av[0]) == 0 || ft_atosize_t(av[1]) == 0
+		|| ft_atosize_t(av[2]) == 0 || ft_atosize_t(av[3]) == 0)
 	{
 		printf("Error: values must be positive integers\n");
 		return (EXIT_FAILURE);
 	}
-	if (ft_atoi(av[0]) > 200)
-	{
-		printf("Error: max of 200 philosophers!\n");
-		return (EXIT_FAILURE);
-	}
-	data->philo_count = ft_atoi(av[0]);
-	data->time_to_die = ft_atoi(av[1]);
-	data->time_to_eat = ft_atoi(av[2]);
-	data->time_to_sleep = ft_atoi(av[3]);
+	data->philo_count = ft_atosize_t(av[0]);
+	data->time_to_die = ft_atosize_t(av[1]);
+	data->time_to_eat = ft_atosize_t(av[2]);
+	data->time_to_sleep = ft_atosize_t(av[3]);
+	data->must_eat_count = 0;
 	if (av[4])
-		data->must_eat_count = ft_atoi(av[4]);
+	{
+		if (ft_atosize_t(av[4]) == 0)
+			return (EXIT_FAILURE);
+		data->must_eat_count = ft_atosize_t(av[4]);
+	}
 	return (EXIT_SUCCESS);
 }

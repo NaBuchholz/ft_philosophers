@@ -6,12 +6,13 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:22:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:39:02 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:29:43 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -62,4 +63,7 @@ void					philo_sleep(t_philo *philo);
 void					philo_think(t_philo *philo);
 int						create_philosophers(t_data *data);
 void					monitor_philosophers(t_data *data);
+void					print_error(char *msg);
+int						is_all_numeric(char *str);
+size_t					ft_atosize_t(char *str);
 #endif
