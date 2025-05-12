@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:31:29 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:19:02 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 		printf("Error: invalid number of arguments\n");
 		return (EXIT_FAILURE);
 	}
-	if (!init_program(&data, ++av))
+	if (init_program(&data, ++av) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (create_philosophers(&data) != EXIT_SUCCESS)
+	if (create_philosophers(&data) == EXIT_FAILURE)
 	{
 		printf("Error: failed to create philosophers\n");
 		clean_all(&data);
