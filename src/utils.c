@@ -6,7 +6,7 @@
 /*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:11:09 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 16:38:58 by nyx              ###   ########.fr       */
+/*   Updated: 2025/05/12 17:32:09 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@ static int	ft_check_overflow(char *str)
 {
 	size_t	res;
 	int		i;
+	int		len;
 
 	i = 0;
+	len = 0;
 	res = 0;
 	if (str[i] == '+')
 		i++;
+	while (str[i + len] >= '0' && str[i + len] <= '9')
+		len++;
+	if (len > 10)
+		return (1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (res > SIZE_MAX / 10)
@@ -60,7 +66,7 @@ void	print_error(char *msg)
 
 int	is_all_numeric(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '+')
@@ -73,6 +79,7 @@ int	is_all_numeric(char *str)
 	}
 	return (1);
 }
+
 void	*ft_memset(void *s, int c, size_t len)
 {
 	unsigned char	*temp_pt;
@@ -80,7 +87,7 @@ void	*ft_memset(void *s, int c, size_t len)
 	temp_pt = (unsigned char *)s;
 	while (len > 0)
 	{
-		*temp_pt = (unsigned char) c;
+		*temp_pt = (unsigned char)c;
 		temp_pt++;
 		len--;
 	}

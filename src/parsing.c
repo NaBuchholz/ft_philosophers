@@ -6,7 +6,7 @@
 /*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 16:34:16 by nyx              ###   ########.fr       */
+/*   Updated: 2025/05/12 17:18:24 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ static int	check_valid_args(char **av)
 	if (!check_valid_number(av[0]) || !check_valid_number(av[1])
 		|| !check_valid_number(av[2]) || !check_valid_number(av[3]))
 	{
-		printf("Error: values must be positive integers\n");
+		printf("Error: Invalid arguments - values must be positive integers\n");
 		return (EXIT_FAILURE);
 	}
 	if (ft_atosize_t(av[0]) > 200)
 	{
-		printf("Error: max of 200 philosophers!\n");
+		printf("Error: Invalid arguments - max of 200 philosophers!\n");
 		return (EXIT_FAILURE);
 	}
 	if (av[4] && !check_valid_number(av[4]))
 	{
-		printf("Error: values must be positive integers\n");
+		printf("Error: Invalid arguments - values must be positive integers\n");
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -78,7 +78,7 @@ int	parse_args(char **av, t_data *data)
 	if (ft_atosize_t(av[0]) == 0 || ft_atosize_t(av[1]) == 0
 		|| ft_atosize_t(av[2]) == 0 || ft_atosize_t(av[3]) == 0)
 	{
-		printf("Error: values must be positive integers\n");
+		printf("Error: Invalid arguments - values must be positive integers\n");
 		return (EXIT_FAILURE);
 	}
 	data->philo_count = ft_atosize_t(av[0]);
