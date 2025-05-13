@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:39:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:59:19 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ void	philo_sleep(t_philo *philo)
 void	philo_think(t_philo *philo)
 {
 	print_status(philo, "is thinking");
+	if (philo->data->philo_count % 2 != 0)
+		ft_usleep(1);
 }

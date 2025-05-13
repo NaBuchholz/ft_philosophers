@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:31:33 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:10:03 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	monitor_philosophers(t_data *data)
 			break ;
 		if (check_if_all_ate_enough(data))
 			break ;
-		usleep(200);
+		usleep(100);
 	}
+	ft_usleep(1);
 }
