@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:22:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/13 17:10:13 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:55:02 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 int						parse_args(char **av, t_data *data);
 int						init_program(t_data *data, char **av);
 long long				get_time(void);
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						clean_all(t_data *data);
 long long				get_time(void);
 size_t					time_diff(long long past);

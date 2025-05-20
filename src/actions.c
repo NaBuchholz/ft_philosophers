@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/20 16:39:25 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:00:03 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	print_status(t_philo *philo, char *message)
 {
+	int	is_dead;
+
+	pthread_mutex_lock(&philo->data->dead_mutex);
+	is_dead = philo->data->is_dead;
+	pthread_mutex_unlock(&philo->data->dead_mutex);
 	pthread_mutex_lock(&philo->data->print_mutex);
-	if (!is_simulation_over(philo->data))
+	if (!is_dead || (is_dead && ft_strncmp(message, "died", 4) == 0))
 		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
 			message);
-	else
-	{
-		pthread_mutex_lock(&philo->data->dead_mutex);
-		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
-			message);
-		pthread_mutex_unlock(&philo->data->dead_mutex);
-	}
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 

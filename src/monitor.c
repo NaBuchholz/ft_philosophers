@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/20 16:43:35 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:58:33 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,27 @@ int	is_simulation_over(t_data *data)
 
 	pthread_mutex_lock(&data->dead_mutex);
 	result = data->is_dead;
-	if (result)
-		printf("DEBUG: is_simulation_over returned true (is_dead=%d)\n", data->is_dead);
 	pthread_mutex_unlock(&data->dead_mutex);
 	return (result);
 }
 
 static int	check_if_philo_died(t_data *data, t_philo *philo)
 {
+	int	died;
+
+	died = 0;
 	pthread_mutex_lock(&data->dead_mutex);
 	if (philo->eating == 0 && time_diff(philo->last_meal) > data->time_to_die)
 	{
-		printf("DEBUG: Philosopher %zu died! Time since last meal: %zu ms (limit: %zu ms)\n",
-				philo->id, time_diff(philo->last_meal), philo->data->time_to_die);
-		print_status(philo, "died");
 		data->is_dead = 1;
-		pthread_mutex_unlock(&data->dead_mutex);
-		return (1);
+		died = 1;
 	}
 	pthread_mutex_unlock(&data->dead_mutex);
+	if (died)
+	{
+		print_status(philo, "died");
+		return (1);
+	}
 	return (0);
 }
 
@@ -80,10 +82,7 @@ void	monitor_philosophers(t_data *data)
 			i++;
 		}
 		if (is_simulation_over(data))
-		{
-			printf("DEBUG: Simulation is over, exiting monitor loop\n");
 			break ;
-		}
 		if (check_if_all_ate_enough(data))
 			break ;
 		usleep(50);
