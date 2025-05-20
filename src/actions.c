@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/13 16:59:19 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:39:25 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	print_status(t_philo *philo, char *message)
 	if (!is_simulation_over(philo->data))
 		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
 			message);
+	else
+	{
+		pthread_mutex_lock(&philo->data->dead_mutex);
+		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
+			message);
+		pthread_mutex_unlock(&philo->data->dead_mutex);
+	}
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
