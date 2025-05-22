@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:32 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/10 16:32:44 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:05:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	clean_all(t_data *data)
 
 	if (!data)
 		return (1);
+	pthread_mutex_lock(&data->dead_mutex);
+	data->is_dead = 1;
+	pthread_mutex_unlock(&data->dead_mutex);
 	if (data->philos)
 		join_philosopher_threads(data->philos, data->philo_count);
 	if (data->forks)

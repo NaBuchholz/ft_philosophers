@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/20 17:00:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:02:55 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@ void	print_status(t_philo *philo, char *message)
 		printf("%ld %ld %s\n", time_diff(philo->data->start_time), philo->id,
 			message);
 	pthread_mutex_unlock(&philo->data->print_mutex);
-}
-
-void	take_forks(t_philo *philo)
-{
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->l_fork);
-		print_status(philo, "has taken a fork");
-		pthread_mutex_lock(philo->r_fork);
-		print_status(philo, "has taken a fork");
-	}
-	else
-	{
-		pthread_mutex_lock(philo->r_fork);
-		print_status(philo, "has taken a fork");
-		pthread_mutex_lock(philo->l_fork);
-		print_status(philo, "has taken a fork");
-	}
 }
 
 void	philo_eat(t_philo *philo)

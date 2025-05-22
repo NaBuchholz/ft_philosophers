@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 13:20:54 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/12 14:43:09 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/22 18:03:32 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC = main.c \
 	  actions.c \
 	  clean.c \
 	  monitor.c \
+	  take_forks.c \
 	  philosophers.c \
 	  time_utils.c \
 	  utils.c

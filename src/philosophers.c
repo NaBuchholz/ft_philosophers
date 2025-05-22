@@ -6,11 +6,32 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:58 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 10:34:50 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:07:36 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static void	*handle_single_philo(t_philo *philo)
+{
+	pthread_mutex_lock(philo->l_fork);
+	print_status(philo, "has taken a fork");
+	ft_usleep(philo->data->time_to_die);
+	pthread_mutex_unlock(philo->l_fork);
+	return (NULL);
+}
+
+static void	philo_cycle(t_philo *philo)
+{
+	if (!is_simulation_over(philo->data))
+		take_forks(philo);
+	if (!is_simulation_over(philo->data))
+		philo_eat(philo);
+	if (!is_simulation_over(philo->data))
+		philo_sleep(philo);
+	if (!is_simulation_over(philo->data))
+		philo_think(philo);
+}
 
 static void	*philo_routine(void *philosopher)
 {
@@ -18,26 +39,11 @@ static void	*philo_routine(void *philosopher)
 
 	philo = (t_philo *)philosopher;
 	if (philo->data->philo_count == 1)
-	{
-		pthread_mutex_lock(philo->l_fork);
-		print_status(philo, "has taken a fork");
-		ft_usleep(philo->data->time_to_die);
-		pthread_mutex_unlock(philo->l_fork);
-		return (NULL);
-	}
+		return (handle_single_philo(philo));
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
 	while (!is_simulation_over(philo->data))
-	{
-		if (!is_simulation_over(philo->data))
-			take_forks(philo);
-		if (!is_simulation_over(philo->data))
-			philo_eat(philo);
-		if (!is_simulation_over(philo->data))
-			philo_sleep(philo);
-		if (!is_simulation_over(philo->data))
-			philo_think(philo);
-	}
+		philo_cycle(philo);
 	return (NULL);
 }
 
