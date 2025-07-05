@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/12 11:20:33 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:40:52 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ int	init_program(t_data *data, char **av)
 	if (init_data(data) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	if (parse_args(av, data) != EXIT_SUCCESS)
-	{
-		clean_all(data);
 		return (EXIT_FAILURE);
-	}
 	if (init_mutexes(data) != EXIT_SUCCESS)
 	{
 		clean_all(data);
