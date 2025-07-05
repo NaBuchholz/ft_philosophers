@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/20 16:58:33 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:31:42 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,20 @@ int	is_simulation_over(t_data *data)
 
 static int	check_if_philo_died(t_data *data, t_philo *philo)
 {
-	int	died;
-
-	died = 0;
 	pthread_mutex_lock(&data->dead_mutex);
+	if (data->is_dead)
+	{
+		pthread_mutex_unlock(&data->dead_mutex);
+		return (1);
+	}
 	if (philo->eating == 0 && time_diff(philo->last_meal) > data->time_to_die)
 	{
 		data->is_dead = 1;
-		died = 1;
-	}
-	pthread_mutex_unlock(&data->dead_mutex);
-	if (died)
-	{
+		pthread_mutex_unlock(&data->dead_mutex);
 		print_status(philo, "died");
 		return (1);
 	}
+	pthread_mutex_unlock(&data->dead_mutex);
 	return (0);
 }
 
