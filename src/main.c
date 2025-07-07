@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:10:40 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/05 16:14:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:19:02 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 	if (create_philosophers(&data) == EXIT_FAILURE)
 	{
 		printf("Error: failed to create philosophers\n");
+		clean_all(&data);
 		return (EXIT_FAILURE);
 	}
 	monitor_philosophers(&data);
