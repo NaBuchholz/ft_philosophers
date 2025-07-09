@@ -1,4 +1,4 @@
-<p align="left"><h1 align="center">Ambiente de Desenvolvimento 42</h1></p>
+<p align="left"><h1 align="center">A filosofia nunca foi tão mortal 💀</h1></p>
 <p align="center">
 	<img src="https://img.shields.io/badge/licença-MIT-0b96a2?style=flat&logo=opensourceinitiative&logoColor=white" alt="licença">
 	<img src="https://img.shields.io/badge/linguagem-Docker-0b96a2?style=flat&logo=docker&logoColor=white" alt="linguagem-principal">
@@ -6,142 +6,233 @@
 	<img src="https://img.shields.io/badge/Norminette-v3.3.51-0b96a2?style=flat&logo=42&logoColor=white" alt="versão-norminette">
 </p>
 
-## 🔗 Índice
-
-- [📍 Visão Geral](#-visão-geral)
-- [✨ Funcionalidades](#-funcionalidades)
-- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
-- [🚀 Começando](#-começando)
-  - [☑️ Pré-requisitos](#-pré-requisitos)
-  - [⚙️ Instalação](#-instalação)
-  - [🤖 Uso](#-uso)
-- [⚙️ Configuração do Container de Desenvolvimento](#-configuração-do-container-de-desenvolvimento)
-- [🛠️ Ferramentas e Extensões](#-ferramentas-e-extensões)
-- [🧰 Scripts Utilitários](#-scripts-utilitários)
-- [🎗 Licença](#-licença)
+ # 🍝 Philosophers
 
 ## 📍 Visão Geral
 
-Este repositório fornece um ambiente de desenvolvimento pronto para uso para projetos da Escola 42. Ele utiliza Docker e o recurso devcontainer do VS Code para criar um ambiente consistente e pré-configurado que segue os padrões de codificação da 42, incluindo validação com Norminette. Esta configuração permite que você se concentre na codificação em vez da configuração do ambiente, com todas as ferramentas e aliases necessários pré-instalados.
+O projeto **Philosophers** é uma implementação em C do famoso problema dos filósofos jantando, originalmente formulado por Edsger Dijkstra em 1965. Este projeto explora os conceitos fundamentais de **programação concorrente**, **sincronização de threads** e **prevenção de deadlocks**.
+
+### 🎯 Objetivos de Aprendizado
+
+- Compreender os conceitos de **threading** e **mutexes**
+- Implementar sincronização de recursos compartilhados
+- Prevenir **race conditions** e **deadlocks**
+- Gerenciar o tempo de forma precisa em aplicações multi-thread
+- Trabalhar com a biblioteca `pthread` em C
+
+## 🧠 O Problema dos Filósofos
+
+### 📖 Descrição do Problema
+
+Um ou mais filósofos sentam-se em uma mesa redonda com um grande prato de espaguete no centro. Cada filósofo tem um garfo, mas precisa de **dois garfos** para comer. Os filósofos alternam entre três estados:
+
+- 🍝 **Comendo**: Precisa segurar dois garfos
+- 💤 **Dormindo**: Descansa após comer
+- 🤔 **Pensando**: Reflete sobre a vida
+
+### ⚠️ Desafios
+
+- **Deadlock**: Todos os filósofos pegam um garfo e esperam pelo segundo
+- **Starvation**: Um filósofo nunca consegue comer
+- **Race Conditions**: Acesso simultâneo aos recursos compartilhados
 
 ## ✨ Funcionalidades
 
-- **Ambiente Docker Completo**: Ubuntu 22.04 com todas as ferramentas de desenvolvimento necessárias
-- **Integração com Norminette**: Norminette 3.3.51 pré-instalada com aliases convenientes
-- **Configuração do VS Code**: Pré-configurado com extensões essenciais para projetos da 42
-- **GitHub Actions**: Validação automática com Norminette em push e pull requests
-- **Aliases Convenientes**: Atalhos para comandos comuns (norminette, gcc, git)
-- **Oh My Zsh**: Experiência de terminal aprimorada com configuração personalizada
-- **Suporte ao Cabeçalho 42**: Extensão para adicionar o cabeçalho da 42 aos seus arquivos
-- **Ferramentas de Depuração**: Inclui GDB, Valgrind e LLDB para depuração completa
+### 🔧 Parte Obrigatória (philo)
+
+- ✅ Implementação com **threads** e **mutexes**
+- ✅ Cada filósofo é uma thread separada
+- ✅ Proteção de garfos com mutexes individuais
+- ✅ Monitoramento de morte em tempo real
+- ✅ Logs formatados com timestamps precisos
+- ✅ Prevenção de data races
+
+## 🛠️ Instalação e Uso
+
+### 📋 Pré-requisitos
+
+- **GCC** ou **Clang** compiler
+- **Make**
+- **pthread** library
+- Sistema Unix/Linux
+
+### 🚀 Compilação
+
+```bash
+# Clonar o repositório
+git clone https://github.com/NaBuchholz/ft_philosophers.git
+cd ft_philosophers
+
+# Compilar o projeto
+make
+```
+
+### 📝 Uso
+
+```bash
+# Executar o programa
+./philo <num_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [num_times_must_eat]
+```
+
+### 🔍 Parâmetros
+
+- **num_philosophers**: Número de filósofos (e garfos)
+- **time_to_die**: Tempo em ms para morrer se não comer
+- **time_to_eat**: Tempo em ms necessário para comer
+- **time_to_sleep**: Tempo em ms para dormir
+- **num_times_must_eat**: (Opcional) Número de vezes que cada filósofo deve comer
+
+### 📊 Exemplos de Uso
+
+```bash
+# Cenário básico - 4 filósofos
+./philo 4 310 200 100
+
+# Cenário com limite de refeições
+./philo 5 800 200 200 7
+
+# Cenário de teste de morte
+./philo 1 800 200 200
+
+# Cenário sem mortes
+./philo 4 410 200 200
+```
 
 ## 📁 Estrutura do Projeto
 
-```sh
-.
-├── .devcontainer/              # Configuração do container de desenvolvimento
-│   ├── Dockerfile              # Definição da imagem Docker
-│   ├── devcontainer.json       # Configurações do devcontainer do VS Code
-│   └── post-create.sh          # Script de configuração pós-criação
-├── .github/
-│   └── workflows/              # Configuração do GitHub Actions
-│       └── main.yml            # Workflow de validação com Norminette
-├── .gitignore                  # Padrões de ignorar do Git para projetos em C
-├── LICENSE                     # Licença MIT
-├── README.md                   # Documentação do projeto
-└── main.c                      # Arquivo C de exemplo
+```
+ft_philosophers/
+├── src/                      # Código fonte
+│   ├── actions.c
+│   ├── clean.c
+│   ├── init.c
+│   ├── main.c
+│   ├── monitor.c
+│   ├── parsing.c
+│   ├── philosophers.c
+│   ├── take_forks.c
+│   ├── time_utils.c
+│   └── utils.c
+├── includes/                 # Headers
+│   └── philo.h
+├── Makefile
+├── LICENSE
+└── README.md
 ```
 
-## 🚀 Começando
+## ⚙️ Implementação
 
-### ☑️ Pré-requisitos
+### 🧵 Arquitetura
 
-- [Docker](https://www.docker.com/products/docker-desktop/) instalado em seu sistema
-- [Visual Studio Code](https://code.visualstudio.com/) com a extensão [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- Git
+O projeto está organizado de forma modular com as seguintes responsabilidades:
 
-### ⚙️ Instalação
+- **main.c**: Ponto de entrada do programa
+- **parsing.c**: Validação e processamento dos argumentos
+- **init.c**: Inicialização das estruturas e recursos
+- **philosophers.c**: Lógica principal dos filósofos
+- **actions.c**: Ações dos filósofos (comer, dormir, pensar)
+- **take_forks.c**: Gerenciamento de garfos
+- **monitor.c**: Monitoramento da simulação
+- **time_utils.c**: Utilitários para controle de tempo
+- **utils.c**: Funções auxiliares gerais
+- **clean.c**: Limpeza de recursos e finalização
 
-1. Clone este repositório:
-```sh
-git clone https://github.com/SEU-USUARIO/ambiente-dev-42
+### 🔄 Fluxo de Execução
+
+1. **Inicialização**: Parsing de argumentos e setup de estruturas
+2. **Criação de Threads**: Uma thread por filósofo + thread monitora
+3. **Simulação**: Loop principal de cada filósofo
+4. **Monitoramento**: Verificação contínua de condições de parada
+5. **Finalização**: Cleanup de recursos
+
+### 🍴 Estratégia Anti-Deadlock
+
+- **Ordenação de garfos**: Filósofos pegam garfos em ordem específica
+- **Offset inicial**: Filósofos ímpares começam com delay
+- **Monitoramento ativo**: Thread dedicada verifica condições
+
+## 🧪 Testes
+
+### 🔍 Casos de Teste Essenciais
+
+```bash
+# Teste de morte básico
+./philo 1 800 200 200        # Deve morrer
+
+# Teste sem mortes
+./philo 4 410 200 200        # Nenhum deve morrer
+
+# Teste com 2 filósofos
+./philo 2 800 200 200        # Edge case importante
+
+# Teste com muitos filósofos
+./philo 200 800 200 200      # Teste de performance
+
+# Teste com limite de refeições
+./philo 5 800 200 200 7      # Deve parar após 7 refeições cada
 ```
 
-2. Abra o repositório no VS Code:
-```sh
-code ambiente-dev-42
-```
+## 📚 Conceitos Aprendidos
 
-3. Quando solicitado, clique em "Reabrir no Container" ou use a paleta de comandos (F1) e selecione "Remote-Containers: Reopen in Container"
+### 🧵 Threading e Sincronização
 
-4. Aguarde a construção e inicialização do container (isso pode levar alguns minutos na primeira vez)
+- **Threads POSIX**: Criação e gerenciamento de threads
+- **Mutexes**: Exclusão mútua para recursos compartilhados
+- **Semáforos**: Controle de acesso a recursos limitados
+- **Race Conditions**: Prevenção de condições de corrida
 
-### 🤖 Uso
+### 🔒 Problemas de Concorrência
 
-Uma vez que o container esteja em execução, você pode:
+- **Deadlock**: Situações onde threads ficam bloqueadas indefinidamente
+- **Starvation**: Quando uma thread nunca consegue acessar recursos
+- **Priority Inversion**: Inversão de prioridades em sistemas multi-thread
 
-- Usar o terminal dentro do VS Code para compilar e executar seu código
-- Editar arquivos com a formatação 42 aplicada automaticamente
-- Executar a Norminette com o alias `norm` para verificar seu código
-- Usar todos os aliases configurados para tarefas de desenvolvimento
-- Depurar seu código usando o depurador integrado
+### ⚡ Otimizações
 
-## ⚙️ Configuração do Container de Desenvolvimento
+- **Busca por performance**: Minimizar latência de verificações
+- **Uso eficiente de CPU**: Evitar busy waiting desnecessário
+- **Gestão de memória**: Prevenção de vazamentos em ambiente multi-thread
 
-O container de desenvolvimento é configurado em `.devcontainer/devcontainer.json` e inclui:
+## 🐛 Problemas Comuns
 
-- Ferramentas e bibliotecas de desenvolvimento C/C++
-- Norminette 3.3.51 para validação de estilo de código
-- Oh My Zsh para uma experiência de terminal aprimorada
-- Extensões do VS Code para projetos da Escola 42
-- Configurações personalizadas para os padrões de codificação da 42
+### 🔍 Situações Frequentes
 
-## 🛠️ Ferramentas e Extensões
+1. **Threads não terminam**: Verificar se todos os mutexes são desbloqueados
+2. **Mensagens misturadas**: Proteger saída com mutex
+3. **Morte não detectada**: Verificar precisão do timing
+4. **Vazamentos de memória**: Garantir cleanup adequado
 
-Este ambiente vem com as seguintes extensões do VS Code:
+## 📖 Recursos
 
-- **42 Header**: Adiciona o cabeçalho da 42 aos seus arquivos
-- **42 C Format**: Formata seu código de acordo com a norma da 42
-- **42 Norminette 3**: Integra o verificador Norminette
-- **42 FT Count Line**: Conta o número de linhas em seu projeto
-- **C/C++ Tools**: Suporte completo às linguagens C/C++
-- **GitLens**: Integração aprimorada com Git
-- **Better Comments**: Destaque aprimorado de comentários
-- **LLDB**: Suporte a depurador
-- **Markdown All in One**: Suporte à edição de Markdown
-- **Code Spell Checker**: Verificação ortográfica para comentários e strings
+### 📚 Documentação
 
-## 🧰 Scripts Utilitários
+- [pthread Manual](https://man7.org/linux/man-pages/man7/pthreads.7.html)
+- [Mutex Operations](https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3.html)
+- [Semaphore Operations](https://man7.org/linux/man-pages/man3/sem_wait.3.html)
 
-O ambiente vem com aliases úteis (disponíveis tanto no bash quanto no zsh):
+### 🎓 Materiais de Estudo
 
-### Norminette
-- `norm`: Executar norminette
-- `normr`: Executar norminette ignorando o cabeçalho de origem proibido
-- `norma`: Executar norminette com todas as verificações
-- `normc`: Verificar apenas arquivos .c e .h
-- `normh`: Mostrar ajuda da norminette
-- `normv`: Mostrar versão da norminette
+- [The Dining Philosophers Problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- [Deadlock Prevention](https://www.geeksforgeeks.org/deadlock-prevention/)
+- [Thread Synchronization](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)
 
-### Compilação
-- `gcc`: Executar gcc com flags da 42 (-Wall -Wextra -Werror)
-- `cc`: Executar cc com flags da 42
-- `clean`: Remover arquivos .o
-- `fclean`: Remover arquivos .o, .out e .a
+### 🔧 Ferramentas Úteis
 
-### Git
-- `gst`: Executar git status
-- `ga`: Executar git add
-- `gc`: Executar git commit -m
-- `gp`: Executar git push
-- `gl`: Executar git log com gráfico
+- **Valgrind**: Detecção de vazamentos e race conditions
+- **GDB**: Debugging de programas multi-thread
+- **Helgrind**: Detector de race conditions
+- **DRD**: Detector de deadlocks
 
-### Específicos da 42
-- `test`: Compilar com flags de depuração
-- `val`: Executar valgrind com detecção de vazamento de memória
+## 📄 Licença
 
-## 🎗 Licença
+Este projeto é parte do currículo da **42 School** e está sob a licença MIT.
 
-Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
+---
+
+### 📞 Contato
+
+- **GitHub**: [@NaBuchholz](https://github.com/NaBuchholz)
+- **42 Intranet**: `nbuchhol`
+---
 
 <p align="center">Feito com 💜 por Nyx</p>
